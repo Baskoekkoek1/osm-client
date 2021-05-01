@@ -1,11 +1,16 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import TeamsTable from "./Components/TeamsTable";
+import Header from "./Components/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import TeamsSchedule from "./Components/TeamsSchedule";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Header />
+      <TeamsTable />
+      <TeamsSchedule />
     </div>
   );
 }
