@@ -3,6 +3,7 @@ import Table from "react-bootstrap/esm/Table";
 import { useSelector } from "react-redux";
 import { selectAllTeams } from "../../store/teams/selectors";
 import styles from "../../index.module.scss";
+import { Button } from "react-bootstrap";
 
 export default function TeamsSchedule() {
   interface Team {
@@ -34,6 +35,9 @@ export default function TeamsSchedule() {
             <td>{allTeamnames[0]}</td>
             <td>-</td>
             <td>{allTeamnames[1]}</td>
+            <td>
+              <Button>Sim Match</Button>
+            </td>
           </tr>
           <tr>
             <td>{allTeamnames[2]}</td>

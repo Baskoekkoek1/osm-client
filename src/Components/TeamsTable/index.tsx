@@ -18,20 +18,22 @@ export default function TeamsTable() {
     <div className={styles.tableContainer}>
       <Table striped bordered>
         <thead>
-          <th>Name</th>
-          <th>P</th>
-          <th>W</th>
-          <th>L</th>
-          <th>D</th>
-          <th>GF</th>
-          <th>GA</th>
-          <th>GD</th>
+          <tr>
+            <th>Name</th>
+            <th>P</th>
+            <th>W</th>
+            <th>L</th>
+            <th>D</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+          </tr>
         </thead>
         <tbody>
           {/* @ts-ignore */}
           {allTeams.map((team) => {
             return (
-              <tr>
+              <tr key={team.id}>
                 <td>{team.name}</td>
                 <td>{team.played}</td>
                 <td>{team.won}</td>
