@@ -32,3 +32,18 @@ export interface State {
     };
   };
 }
+
+export interface Team {
+  id: number;
+  name: string;
+  offense: number;
+  defense: number;
+  played: number;
+  won: number;
+  lost: number;
+  draw: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  opponents: object[];
+}
