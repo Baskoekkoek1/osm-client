@@ -20,61 +20,10 @@ export default function TeamsSchedule() {
     opponents: object[];
   }
 
-  //   interface Match {
-  //     teamA: string;
-  //     teamB: string;
-  //   }
-
   const allTeams: any = useSelector(selectAllTeams);
   const allTeamnames: any = allTeams.map((team: Team) => {
     return team.name;
   });
-
-  //   console.log("allTeams", allTeams);
-
-  //   const makeSchedule = () => {
-  //     allTeams.forEach(
-  //       (team: Team) =>
-  //         (team.opponents = allTeams.filter(
-  //           (opponent: Team) => opponent !== team
-  //         ))
-  //     );
-
-  //     const matches: Match[] = [];
-
-  //     while (allTeams.some((team: Team) => team.opponents.length)) {
-  //       allTeams.forEach((team: Team) => {
-  //         const match = { teamA: "", teamB: "" };
-  //         const opponents = team.opponents;
-  //         opponents.map((opponent: any) => {
-  //           match.teamA = team.name;
-  //           match.teamB = opponent.name;
-  //           team.opponents.splice(team.opponents.indexOf(opponent));
-  //           opponent.opponents.splice(opponent.opponents.indexOf(opponent));
-  //           matches.push(match);
-  //         });
-  //       });
-  //     }
-
-  //     while (allTeams.some((team: Team) => team.opponents.length)) {
-  //       const playing: any = [];
-  //       for (const team of allTeams) {
-  //         console.log("playing", playing);
-  //         if (playing.includes(team)) continue;
-  //         const opponent = team.opponents.find(
-  //           (opponent: Team) => !playing.includes(opponent)
-  //         );
-  //         if (!opponent) continue;
-  //         team.opponents.splice(team.opponents.indexOf(opponent), 1);
-  //         opponent.opponents.splice(opponent.opponents.indexOf(opponent), 1);
-  //         playing.push(team, opponent);
-  //       }
-  //       if (playing.length) matches.push(playing.map((team: Team) => team.name));
-  //     }
-  //     console.log("matches", matches);
-  //   };
-
-  //   makeSchedule();
 
   return (
     <div className={styles.tableContainer}>
