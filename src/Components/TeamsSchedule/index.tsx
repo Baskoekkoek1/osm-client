@@ -1,6 +1,8 @@
 import React from "react";
+import Table from "react-bootstrap/esm/Table";
 import { useSelector } from "react-redux";
 import { selectAllTeams } from "../../store/teams/selectors";
+import styles from "../../index.module.scss";
 
 export default function TeamsSchedule() {
   interface Team {
@@ -75,9 +77,42 @@ export default function TeamsSchedule() {
   //   makeSchedule();
 
   return (
-    <div>
+    <div className={styles.tableContainer}>
       <h1>Schedule</h1>
-      <p>{allTeamnames[0]}</p>
+      <Table striped bordered>
+        <tbody>
+          <tr>
+            <td>{allTeamnames[0]}</td>
+            <td>-</td>
+            <td>{allTeamnames[1]}</td>
+          </tr>
+          <tr>
+            <td>{allTeamnames[2]}</td>
+            <td>-</td>
+            <td>{allTeamnames[3]}</td>
+          </tr>
+          <tr>
+            <td>{allTeamnames[2]}</td>
+            <td>-</td>
+            <td>{allTeamnames[0]}</td>
+          </tr>
+          <tr>
+            <td>{allTeamnames[1]}</td>
+            <td>-</td>
+            <td>{allTeamnames[3]}</td>
+          </tr>
+          <tr>
+            <td>{allTeamnames[3]}</td>
+            <td>-</td>
+            <td>{allTeamnames[0]}</td>
+          </tr>
+          <tr>
+            <td>{allTeamnames[2]}</td>
+            <td>-</td>
+            <td>{allTeamnames[1]}</td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   );
 }

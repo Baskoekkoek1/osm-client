@@ -15,7 +15,7 @@ export default function TeamsTable() {
   }, [dispatch]);
 
   return (
-    <div id={styles.tableContainer}>
+    <div className={styles.tableContainer}>
       <Table striped bordered>
         <thead>
           <th>Name</th>
