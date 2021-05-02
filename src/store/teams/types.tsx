@@ -13,6 +13,8 @@
 //   };
 // }
 
+import { NumberLiteralType } from "typescript";
+
 // export type TeamsAction = any;
 
 export interface State {
@@ -29,6 +31,12 @@ export interface State {
       points: number;
       goalsFor: number;
       goalsAgainst: number;
+    };
+    all_matches: {
+      homeTeam: Team;
+      awayTeam: Team;
+      homeScore: number;
+      awayScore: number;
     };
   };
 }
