@@ -1,11 +1,12 @@
+import { Match } from "@testing-library/dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { apiUrl } from "../../config/constants";
 import { selectAllTeams } from "./selectors";
 import { Team, State } from "./types";
 
-export const teamsFetched = (data: object[]) => {
-  console.log("action");
+export const teamsFetched = (data: Team[]) => {
+  // console.log("action");
   return {
     type: "TEAMS_FETCHED",
     payload: data,
@@ -15,8 +16,15 @@ export const teamsFetched = (data: object[]) => {
 export const fetchTeams = () => {
   return async function thunk(dispatch: Function, getState: Function) {
     const response = await axios.get(`${apiUrl}/teams/all`);
-    console.log("repsonse", response.data);
+    // console.log("repsonse", response.data);
     dispatch(teamsFetched(response.data));
+  };
+};
+
+export const matchPlayed = (match: object) => {
+  return {
+    type: "MATCH_PLAYED",
+    payload: match,
   };
 };
 
@@ -73,6 +81,14 @@ export const simulateMatch = (teamA: string, teamB: string) => {
         ? scoreCardOffsetTeam2[indexTeam2]
         : 0;
 
-    console.log(`The endscore: ${resultTeam1} - ${resultTeam2}`);
+    const matchResult = {
+      homeTeam: team1,
+      awayTeam: team2,
+      homeScore: resultTeam1,
+      awayScore: resultTeam2,
+    };
+    // console.log(`The endscore: ${resultTeam1} - ${resultTeam2}`);
+    // console.log(matchResult);
+    dispatch(matchPlayed(matchResult));
   };
 };

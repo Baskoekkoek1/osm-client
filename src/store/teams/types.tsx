@@ -47,3 +47,10 @@ export interface Team {
   goalsAgainst: number;
   opponents: object[];
 }
+
+export interface Match {
+  homeTeam: Team;
+  awayTeam: Team;
+  homeScore: number;
+  awayScore: number;
+}
