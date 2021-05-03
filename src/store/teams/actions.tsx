@@ -28,6 +28,26 @@ export const matchPlayed = (match: object) => {
   };
 };
 
+export const homeTeamWins = (match: object) => {
+  return {
+    type: "HOMETEAM_WINS",
+    payload: match,
+  };
+};
+
+export const draw = (match: object) => {
+  return {
+    type: "DRAW",
+    payload: match,
+  };
+};
+export const awayTeamWins = (match: object) => {
+  return {
+    type: "AWAYTEAM_WINS",
+    payload: match,
+  };
+};
+
 export const simulateMatch = (teamA: string, teamB: string) => {
   return async function thunk(dispatch: Function, getState: Function) {
     const state: any = getState();
@@ -46,13 +66,13 @@ export const simulateMatch = (teamA: string, teamB: string) => {
       0,
       0,
       0,
-      0,
-      0,
-      0,
       1,
       1,
       1,
       1,
+      1,
+      2,
+      2,
       2,
       2,
       2,
@@ -90,5 +110,13 @@ export const simulateMatch = (teamA: string, teamB: string) => {
     // console.log(`The endscore: ${resultTeam1} - ${resultTeam2}`);
     // console.log(matchResult);
     dispatch(matchPlayed(matchResult));
+
+    if (matchResult.homeScore > matchResult.awayScore) {
+      dispatch(homeTeamWins(matchResult));
+    } else if (matchResult.homeScore === matchResult.awayScore) {
+      dispatch(draw(matchResult));
+    } else {
+      dispatch(awayTeamWins(matchResult));
+    }
   };
 };
