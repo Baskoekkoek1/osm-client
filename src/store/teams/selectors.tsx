@@ -24,3 +24,6 @@ export const selectSortedTeams = (state: State) => {
   //@ts-ignore
   return [...state.teams.all_teams].sort(compare);
 };
+
+export const selectAllTeamNames = (state: any) =>
+  [...state.teams.all_teams].map((team) => team.name);

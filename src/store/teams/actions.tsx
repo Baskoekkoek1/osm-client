@@ -28,26 +28,6 @@ export const matchPlayed = (match: object) => {
   };
 };
 
-export const homeTeamWins = (match: object) => {
-  return {
-    type: "HOMETEAM_WINS",
-    payload: match,
-  };
-};
-
-export const draw = (match: object) => {
-  return {
-    type: "DRAW",
-    payload: match,
-  };
-};
-export const awayTeamWins = (match: object) => {
-  return {
-    type: "AWAYTEAM_WINS",
-    payload: match,
-  };
-};
-
 export const simulateMatch = (teamA: string, teamB: string) => {
   return async function thunk(dispatch: Function, getState: Function) {
     const state: any = getState();
@@ -107,16 +87,19 @@ export const simulateMatch = (teamA: string, teamB: string) => {
       homeScore: resultTeam1,
       awayScore: resultTeam2,
     };
-    // console.log(`The endscore: ${resultTeam1} - ${resultTeam2}`);
-    // console.log(matchResult);
-    dispatch(matchPlayed(matchResult));
 
-    if (matchResult.homeScore > matchResult.awayScore) {
-      dispatch(homeTeamWins(matchResult));
-    } else if (matchResult.homeScore === matchResult.awayScore) {
-      dispatch(draw(matchResult));
-    } else {
-      dispatch(awayTeamWins(matchResult));
+    console.log(matchResult);
+
+    try {
+      console.log("try");
+      const response = await axios.put(`${apiUrl}/teams/match`, {
+        matchResult,
+      });
+      // console.log("response", response.data.allTeams);
+      dispatch(teamsFetched(response.data.allTeams));
+      dispatch(matchPlayed(response.data.thisMatch));
+    } catch (error) {
+      console.log(error);
     }
   };
 };
