@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "react-bootstrap/esm/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllMatches, selectAllTeams } from "../../store/teams/selectors";
 import styles from "../../index.module.scss";
 import { Button } from "react-bootstrap";
 import { Team } from "../../store/teams/types";
-import { matchPlayed, simulateMatch } from "../../store/teams/actions";
-import { Match } from "@testing-library/dom";
+import { simulateMatch } from "../../store/teams/actions";
 
 export default function TeamsSchedule() {
   const dispatch = useDispatch();
   const allTeams: any = useSelector(selectAllTeams);
-  const allTeamnames: any = allTeams.map((team: Team) => {
+  const unsortAllTeams: any = allTeams.sort((a: Team, b: Team) => {
+    return a.id - b.id;
+  });
+
+  const allTeamnames: any = unsortAllTeams.map((team: Team) => {
     return team.name;
   });
   const allMatches: any = useSelector(selectAllMatches);

@@ -10,13 +10,11 @@ export default function TeamsTable() {
   const dispatch = useDispatch();
 
   const allTeams = useSelector(selectAllTeams);
-  const sortedTeams = useSelector(selectSortedTeams);
+  // const sortedTeams = useSelector(selectSortedTeams);
 
   useEffect(() => {
     dispatch(fetchTeams());
   }, [dispatch]);
-
-  // console.log(sortedTeams);
 
   return (
     <div className={styles.tableContainer}>
@@ -39,7 +37,7 @@ export default function TeamsTable() {
         </thead>
         <tbody>
           {/* @ts-ignore */}
-          {sortedTeams.map((team, i) => {
+          {allTeams.map((team, i) => {
             return (
               <tr key={team.id}>
                 <td>{i + 1}</td>
