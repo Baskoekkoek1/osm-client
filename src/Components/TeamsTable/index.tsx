@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../store/teams/actions";
 import { selectAllTeams, selectSortedTeams } from "../../store/teams/selectors";
 import styles from "../../index.module.scss";
-import { Team } from "../../store/teams/types";
 
 export default function TeamsTable() {
   const dispatch = useDispatch();
 
   const allTeams = useSelector(selectAllTeams);
-  // const sortedTeams = useSelector(selectSortedTeams);
+  const sortedTeams = useSelector(selectSortedTeams);
 
   useEffect(() => {
     dispatch(fetchTeams());
@@ -37,7 +36,7 @@ export default function TeamsTable() {
         </thead>
         <tbody>
           {/* @ts-ignore */}
-          {allTeams.map((team, i) => {
+          {sortedTeams.map((team, i) => {
             return (
               <tr key={team.id}>
                 <td>{i + 1}</td>

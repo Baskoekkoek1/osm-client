@@ -1,9 +1,6 @@
-import { Match } from "@testing-library/dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { apiUrl } from "../../config/constants";
-import { selectAllTeams } from "./selectors";
-import { Team, State } from "./types";
+import { Team } from "./types";
 
 export const teamsFetched = (data: Team[]) => {
   // console.log("action");
@@ -25,6 +22,21 @@ export const matchPlayed = (match: object) => {
   return {
     type: "MATCH_PLAYED",
     payload: match,
+  };
+};
+
+export const resetMatches = () => {
+  return {
+    type: "RESET_MATCHES",
+    payload: null,
+  };
+};
+
+export const reset = () => {
+  return async function thunk(dispatch: Function, getState: Function) {
+    const response = await axios.put(`${apiUrl}/teams/reset`);
+    dispatch(teamsFetched(response.data));
+    dispatch(resetMatches());
   };
 };
 
