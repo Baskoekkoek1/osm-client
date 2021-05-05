@@ -1,6 +1,7 @@
 import { Match } from "@testing-library/dom";
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
+import { appDoneLoading, appLoading } from "../appState/actions";
 import { Team } from "./types";
 
 export const teamsFetched = (data: Team[]) => {
@@ -19,8 +20,10 @@ export const resultsFetched = (data: Match[]) => {
 
 export const fetchTeams = () => {
   return async function thunk(dispatch: Function, getState: Function) {
+    dispatch(appLoading());
     const response = await axios.get(`${apiUrl}/teams/all`);
     dispatch(teamsFetched(response.data));
+    dispatch(appDoneLoading());
   };
 };
 
