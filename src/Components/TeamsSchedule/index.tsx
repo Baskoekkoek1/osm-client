@@ -62,6 +62,7 @@ export default function TeamsSchedule() {
   return (
     <div className={styles.tableContainer}>
       <h1>Schedule</h1>
+
       <Table striped bordered>
         <tbody>
           <tr>

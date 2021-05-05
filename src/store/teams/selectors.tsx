@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { State, Team } from "./types";
 
 const compare = (a: Team, b: Team) => {
@@ -8,6 +9,14 @@ const compare = (a: Team, b: Team) => {
   } else if (a.points === b.points) {
     if (a.goalsFor - a.goalsAgainst < b.goalsFor - b.goalsAgainst) {
       return 1;
+    } else if (a.goalsFor - a.goalsAgainst === b.goalsFor - b.goalsAgainst) {
+      if (a.goalsFor < b.goalsFor) {
+        return 1;
+      } else if (a.goalsFor > b.goalsFor) {
+        return -1;
+      } else {
+        return 0;
+      }
     } else {
       return -1;
     }

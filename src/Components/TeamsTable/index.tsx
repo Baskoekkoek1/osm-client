@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../store/teams/actions";
 import { selectAllTeams, selectSortedTeams } from "../../store/teams/selectors";
 import styles from "../../index.module.scss";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function TeamsTable() {
   const dispatch = useDispatch();
@@ -15,6 +16,12 @@ export default function TeamsTable() {
     dispatch(fetchTeams());
   }, [dispatch]);
 
+  const renderTooltip = (offense: number, defense: number) => (
+    <Tooltip id="button-tooltip">
+      Offense: {offense} <br />
+      Defense: {defense}
+    </Tooltip>
+  );
   return (
     <div className={styles.tableContainer}>
       <Table striped bordered>
@@ -40,7 +47,13 @@ export default function TeamsTable() {
             return (
               <tr key={team.id}>
                 <td>{i + 1}</td>
-                <td>{team.name}</td>
+                <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip(team.offense, team.defense)}
+                >
+                  <td>{team.name}</td>
+                </OverlayTrigger>
                 <td>{team.played}</td>
                 <td>{team.won}</td>
                 <td>{team.lost}</td>
