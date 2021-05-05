@@ -15,15 +15,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div>
-          <TeamsTable />
-          <TeamsSchedule />
-          <ResetButton />
-        </div>
-      )}
+      <TeamsTable />
+      {isLoading ? <Loading /> : null}
+      <TeamsSchedule />
+      <ResetButton />
     </div>
   );
 }
