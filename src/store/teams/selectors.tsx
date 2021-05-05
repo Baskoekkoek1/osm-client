@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { State, Team } from "./types";
 
 const compare = (a: Team, b: Team) => {
@@ -30,7 +29,6 @@ export const selectAllTeams = (state: State) => state.teams.all_teams;
 export const selectAllMatches = (state: State) => state.teams.all_matches;
 
 export const selectSortedTeams = (state: State) => {
-  //@ts-ignore
   return [...state.teams.all_teams].sort(compare);
 };
 

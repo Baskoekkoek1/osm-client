@@ -4,7 +4,6 @@ import { apiUrl } from "../../config/constants";
 import { Team } from "./types";
 
 export const teamsFetched = (data: Team[]) => {
-  // console.log("action");
   return {
     type: "TEAMS_FETCHED",
     payload: data,
@@ -21,7 +20,6 @@ export const resultsFetched = (data: Match[]) => {
 export const fetchTeams = () => {
   return async function thunk(dispatch: Function, getState: Function) {
     const response = await axios.get(`${apiUrl}/teams/all`);
-    // console.log("repsonse", response.data);
     dispatch(teamsFetched(response.data));
   };
 };
@@ -59,7 +57,6 @@ export const simulateMatch = (teamA: string, teamB: string) => {
   return async function thunk(dispatch: Function, getState: Function) {
     const state: any = getState();
     const allTeams: Team[] = state.teams.all_teams;
-    // console.log("allTeams", allTeams);
     const team1 = allTeams.find((team: Team) => teamA === team.name);
     const team2 = allTeams.find((team: Team) => teamB === team.name);
 
@@ -118,18 +115,12 @@ export const simulateMatch = (teamA: string, teamB: string) => {
       awayScore: resultTeam2,
     };
 
-    console.log(matchResult);
-
     try {
-      console.log("try");
       const response = await axios.put(`${apiUrl}/teams/match`, {
         matchResult,
       });
-      // console.log("response", response.data.allTeams);
       dispatch(teamsFetched(response.data.allTeams));
       dispatch(matchPlayed(response.data.thisMatch));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch {}
   };
 };

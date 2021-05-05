@@ -52,7 +52,6 @@ export default function TeamsSchedule() {
 
   const handleClick = (teamA: string, teamB: string) => {
     dispatch(simulateMatch(teamA, teamB));
-    // console.log(playingHomeTeam, playingAwayTeam);
   };
 
   useEffect(() => {
@@ -61,7 +60,9 @@ export default function TeamsSchedule() {
 
   return (
     <div className={styles.tableContainer}>
-      <h1>Schedule</h1>
+      <h2>
+        <strong>Schedule</strong>
+      </h2>
 
       <Table striped bordered>
         <tbody>
@@ -180,7 +181,7 @@ export default function TeamsSchedule() {
                     handleClick(allTeamnames[2], allTeamnames[1]);
                   }}
                 >
-                  Sim Match
+                  Play Match
                 </Button>
               </td>
             )}

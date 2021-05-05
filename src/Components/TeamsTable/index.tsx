@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../store/teams/actions";
-import { selectAllTeams, selectSortedTeams } from "../../store/teams/selectors";
+import { selectSortedTeams } from "../../store/teams/selectors";
 import styles from "../../index.module.scss";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function TeamsTable() {
   const dispatch = useDispatch();
-
-  const allTeams = useSelector(selectAllTeams);
   const sortedTeams = useSelector(selectSortedTeams);
 
   useEffect(() => {
@@ -24,6 +22,9 @@ export default function TeamsTable() {
   );
   return (
     <div className={styles.tableContainer}>
+      <h2>
+        <strong>Group A</strong>
+      </h2>
       <Table striped bordered>
         <thead>
           <tr>
@@ -42,7 +43,6 @@ export default function TeamsTable() {
           </tr>
         </thead>
         <tbody>
-          {/* @ts-ignore */}
           {sortedTeams.map((team, i) => {
             return (
               <tr key={team.id}>
@@ -61,7 +61,9 @@ export default function TeamsTable() {
                 <td>{team.goalsFor}</td>
                 <td>{team.goalsAgainst}</td>
                 <td>{team.goalsFor - team.goalsAgainst}</td>
-                <td>{team.points}</td>
+                <td>
+                  <strong>{team.points}</strong>
+                </td>
               </tr>
             );
           })}
