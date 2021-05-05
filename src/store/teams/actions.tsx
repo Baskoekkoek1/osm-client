@@ -1,3 +1,4 @@
+import { Match } from "@testing-library/dom";
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { Team } from "./types";
@@ -10,11 +11,25 @@ export const teamsFetched = (data: Team[]) => {
   };
 };
 
+export const resultsFetched = (data: Match[]) => {
+  return {
+    type: "RESULTS_FETCHED",
+    payload: data,
+  };
+};
+
 export const fetchTeams = () => {
   return async function thunk(dispatch: Function, getState: Function) {
     const response = await axios.get(`${apiUrl}/teams/all`);
     // console.log("repsonse", response.data);
     dispatch(teamsFetched(response.data));
+  };
+};
+
+export const fetchResults = () => {
+  return async function thunk(dispatch: Function, getState: Function) {
+    const response = await axios.get(`${apiUrl}/teams/results`);
+    dispatch(resultsFetched(response.data));
   };
 };
 
@@ -63,6 +78,9 @@ export const simulateMatch = (teamA: string, teamB: string) => {
       1,
       1,
       1,
+      2,
+      2,
+      2,
       2,
       2,
       2,

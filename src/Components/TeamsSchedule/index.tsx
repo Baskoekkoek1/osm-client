@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from "react-bootstrap/esm/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllMatches, selectAllTeams } from "../../store/teams/selectors";
 import styles from "../../index.module.scss";
 import { Button } from "react-bootstrap";
 import { Team } from "../../store/teams/types";
-import { simulateMatch } from "../../store/teams/actions";
+import { fetchResults, simulateMatch } from "../../store/teams/actions";
 
 export default function TeamsSchedule() {
   const dispatch = useDispatch();
@@ -54,6 +54,10 @@ export default function TeamsSchedule() {
     dispatch(simulateMatch(teamA, teamB));
     // console.log(playingHomeTeam, playingAwayTeam);
   };
+
+  useEffect(() => {
+    dispatch(fetchResults());
+  }, [dispatch]);
 
   return (
     <div className={styles.tableContainer}>
